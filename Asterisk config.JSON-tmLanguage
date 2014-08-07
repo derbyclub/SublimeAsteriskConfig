@@ -94,12 +94,12 @@
 			]
 		},
 		"comment": {
-			"name": "comment.line",
-			"match": "(;).*$\\n?",
-			"captures": {
-				"1": { "name": "comment.line.character" }
-			}
-
+			"name": "meta.comment.line",
+			"begin": "(;.*)",
+			"beginCaptures": {
+				"1": { "name": "comment.line" }
+			},
+			"end": "$"
 		}
 	},
 
@@ -174,17 +174,17 @@
 						{ "include": "#ip_netmask_value" },
 						{ "include": "#net_address_value" },
 						{ "include": "#boolean_value" },
-						{ "include": "#comment" },
 						{ "include": "#numerics" },
 						{
 							"name": "string",
 							"match": ".*"
-						}
+						},
+						{ "include": "#comment" }
 					]
 				},
 				{
 					"name": "meta.command",
-					"begin": "^\\s*(include|[a-zA-Z_-]+)\\s*(=>)\\s*([a-zA-Z0-9_-]+)",
+					"begin": "^\\s*(include|[a-zA-Z_-]+)\\s*(=>)\\s*([a-zA-Z0-9\\/_-]+)",
 					"beginCaptures": {
 						"1": { "name": "keyword.control" },
 						"2": { "name": "keyword.operator" },

@@ -218,10 +218,6 @@
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#comment</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#numerics</string>
 						</dict>
 						<dict>
@@ -230,11 +226,15 @@
 							<key>name</key>
 							<string>string</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*(include|[a-zA-Z_-]+)\s*(=&gt;)\s*([a-zA-Z0-9_-]+)</string>
+					<string>^\s*(include|[a-zA-Z_-]+)\s*(=&gt;)\s*([a-zA-Z0-9\/_-]+)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -505,18 +505,20 @@
 		</dict>
 		<key>comment</key>
 		<dict>
-			<key>captures</key>
+			<key>begin</key>
+			<string>(;.*)</string>
+			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>comment.line.character</string>
+					<string>comment.line</string>
 				</dict>
 			</dict>
-			<key>match</key>
-			<string>(;).*$\n?</string>
+			<key>end</key>
+			<string>$</string>
 			<key>name</key>
-			<string>comment.line</string>
+			<string>meta.comment.line</string>
 		</dict>
 		<key>ip_netmask_value</key>
 		<dict>
