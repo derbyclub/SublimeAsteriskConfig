@@ -20,17 +20,21 @@
 			"name": "constant.other",
 			"match": "\\b((?:\\d{1,3}\\.){3}\\d{1,3})(?:/((?:\\d{1,3}\\.){3}\\d{1,3}))?\\b"
 		},
+		"numerics": {
+			"name": "constant.other",
+			"match": "\\b[0-9]*?\\b"
+		},
 		"boolean_value": {
 			"name": "constant.numeric",
-			"match": "\\b(true|false|yes|no|all)\\b"
+			"match": "\\b(true|false|yes|no|all|none)\\b"
 		},
 		"ast_variable": {
 			"name": "constant.numeric",
 			"match": "\\$\\{[a-zA-Z0-9_-]+\\}"
 		},
-		"ast_expression_old": {
-			"name": "constant.language",
-			"match": "(\\$\\[)(.*)(\\])"
+		"ast_string": {
+				"name": "string.unquoted",
+				"match": "[a-zA-Z0-9_-]+"
 		},
 		"ast_expression": {
 			"name": "meta.variable.parameter",
@@ -45,7 +49,8 @@
 			"patterns": [
 				{ "include": "#ast_function" },
 				{ "include": "#ast_expression" },
-				{ "include": "#ast_variable" }
+				{ "include": "#ast_variable" },
+				{ "include": "#numerics" }
 			]
 		},
 		"ast_function": {
@@ -63,14 +68,16 @@
 			"patterns": [
 				{ "include": "#ast_function" },
 				{ "include": "#ast_expression" },
-				{ "include": "#ast_variable" }
+				{ "include": "#ast_variable" },
+				{ "include": "#numerics" },
+				{ "include": "#ast_string" }
 			]
 		},
 		"ast_applications": {
 			"name": "meta.internal.function",
-			"begin": "(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|NoOp|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\\(?",
+			"begin": "(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|Noop|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\\(?",
 			"beginCaptures": {
-			    "1": { "name": "support.function" }
+				"1": { "name": "support.function" }
 			},
 			"end": "\\)?\\s*$",
 			"patterns": [
@@ -81,13 +88,18 @@
 				{
 					"name": "string",
 					"match": "\\?\\w+:\\w+"
-				}
+				},
+				{ "include": "#numerics" },
+				{ "include": "#ast_string" }
 			]
 		},
 		"comment": {
 			"name": "comment.line",
 			"match": "(;).*$\\n?",
-			"1": { "name": "string" }
+			"captures": {
+				"1": { "name": "comment.line.character" }
+			}
+
 		}
 	},
 
@@ -97,10 +109,10 @@
 			"name": "meta.section",
 			"begin": "(\\[(macro-)?.*\\])(?:\\((!)?\\s*,?(?:\\s*(\\w+)\\s*,?)*\\))?",
 			"beginCaptures": {
-			    "1": { "name": "storage.type" },
-			    "2": { "name": "storage.modifier" },
-			    "3": { "name": "storage.modifier" },
-			    "4": { "name": "entity.other-inherited-class" }
+				"1": { "name": "storage.type" },
+				"2": { "name": "storage.modifier" },
+				"3": { "name": "storage.modifier" },
+				"4": { "name": "entity.other-inherited-class" }
 			},
 			"end": "(?=\\[)",
 			"patterns": [
@@ -122,7 +134,7 @@
 				},
 				{
 					"name": "meta.extension",
-					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[0-9]+|_[0-9XZN!\\.]+),(\\d+|n)(\\(.*?\\))?,",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z]+|[0-9]+|_[0-9XZN!\\.]+),(\\d+|n)(\\(.*?\\))?,",
 					"beginCaptures": {
 						"1": { "name": "keyword.other" },
 						"2": { "name": "keyword.operator" },
@@ -151,35 +163,57 @@
 				},
 				{
 					"name": "meta.expression",
-					"begin": "^\\s*([a-zA-Z_-]+)\\s*(=)(?!>)",
+					"begin": "^\\s*([a-zA-Z0-9_-]+)\\s*(=)(?!>)",
 					"beginCaptures": {
-					    "1": { "name": "variable.parameter" },
-					    "2": { "name": "keyword.operator" }
+						"1": { "name": "variable.parameter" },
+						"2": { "name": "keyword.operator" }
 					},
 					"end": "$",
-			    	"patterns": [
-			    		{ "include": "#path_value" },
-			    		{ "include": "#ip_netmask_value" },
-			    		{ "include": "#net_address_value" },
-			    		{ "include": "#boolean_value" },
-			    		{ "include": "#comment" }
-			    	]
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#comment" },
+						{ "include": "#numerics" },
+						{
+							"name": "string",
+							"match": ".*"
+						}
+					]
 				},
 				{
 					"name": "meta.command",
-					"begin": "^\\s*(include|[a-zA-Z_-]+)\\s*(=>)",
+					"begin": "^\\s*(include|[a-zA-Z_-]+)\\s*(=>)\\s*([a-zA-Z0-9_-]+)",
 					"beginCaptures": {
-					    "1": { "name": "keyword.control" },
-					    "2": { "name": "keyword.operator" }
+						"1": { "name": "keyword.control" },
+						"2": { "name": "keyword.operator" },
+						"3": { "name": "string" }
 					},
 					"end": "$",
-			    	"patterns": [
-			    		{ "include": "#path_value" },
-			    		{ "include": "#ip_netmask_value" },
-			    		{ "include": "#net_address_value" },
-			    		{ "include": "#boolean_value" },
-			    		{ "include": "#comment" }
-			    	]
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#comment" }
+					]
+				},
+				{
+					"name": "meta.command",
+					"begin": "^\\s*(\\#include)\\s*([a-zA-Z0-9_\\*\\.\\/]+)",
+					"beginCaptures": {
+						"1": { "name": "keyword.control" },
+						"2": { "name": "string" }
+					},
+					"end": "$",
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#comment" }
+					]
 				}
 			]
 		}

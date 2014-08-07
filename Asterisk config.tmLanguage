@@ -99,7 +99,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*(exten)\s*(=&gt;)\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[0-9]+|_[0-9XZN!\.]+),(\d+|n)(\(.*?\))?,</string>
+					<string>^\s*(exten)\s*(=&gt;)\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z]+|[0-9]+|_[0-9XZN!\.]+),(\d+|n)(\(.*?\))?,</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -180,7 +180,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*([a-zA-Z_-]+)\s*(=)(?!&gt;)</string>
+					<string>^\s*([a-zA-Z0-9_-]+)\s*(=)(?!&gt;)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -220,11 +220,21 @@
 							<key>include</key>
 							<string>#comment</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#numerics</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>.*</string>
+							<key>name</key>
+							<string>string</string>
+						</dict>
 					</array>
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>^\s*(include|[a-zA-Z_-]+)\s*(=&gt;)</string>
+					<string>^\s*(include|[a-zA-Z_-]+)\s*(=&gt;)\s*([a-zA-Z0-9_-]+)</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
@@ -236,6 +246,55 @@
 						<dict>
 							<key>name</key>
 							<string>keyword.operator</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>string</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$</string>
+					<key>name</key>
+					<string>meta.command</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#path_value</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#ip_netmask_value</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#net_address_value</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#boolean_value</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>^\s*(\#include)\s*([a-zA-Z0-9_\*\.\/]+)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>string</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -274,7 +333,7 @@
 		<key>ast_applications</key>
 		<dict>
 			<key>begin</key>
-			<string>(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|NoOp|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\(?</string>
+			<string>(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|Noop|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\(?</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -310,6 +369,14 @@
 					<string>\?\w+:\w+</string>
 					<key>name</key>
 					<string>string</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numerics</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#ast_string</string>
 				</dict>
 			</array>
 		</dict>
@@ -351,14 +418,11 @@
 					<key>include</key>
 					<string>#ast_variable</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numerics</string>
+				</dict>
 			</array>
-		</dict>
-		<key>ast_expression_old</key>
-		<dict>
-			<key>match</key>
-			<string>(\$\[)(.*)(\])</string>
-			<key>name</key>
-			<string>constant.language</string>
 		</dict>
 		<key>ast_function</key>
 		<dict>
@@ -408,7 +472,22 @@
 					<key>include</key>
 					<string>#ast_variable</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numerics</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#ast_string</string>
+				</dict>
 			</array>
+		</dict>
+		<key>ast_string</key>
+		<dict>
+			<key>match</key>
+			<string>[a-zA-Z0-9_-]+</string>
+			<key>name</key>
+			<string>string.unquoted</string>
 		</dict>
 		<key>ast_variable</key>
 		<dict>
@@ -420,16 +499,19 @@
 		<key>boolean_value</key>
 		<dict>
 			<key>match</key>
-			<string>\b(true|false|yes|no|all)\b</string>
+			<string>\b(true|false|yes|no|all|none)\b</string>
 			<key>name</key>
 			<string>constant.numeric</string>
 		</dict>
 		<key>comment</key>
 		<dict>
-			<key>1</key>
+			<key>captures</key>
 			<dict>
-				<key>name</key>
-				<string>string</string>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>comment.line.character</string>
+				</dict>
 			</dict>
 			<key>match</key>
 			<string>(;).*$\n?</string>
@@ -447,6 +529,13 @@
 		<dict>
 			<key>match</key>
 			<string>(\w+://)?((\w+:)?\w+@)?([\w-]+\.)+[a-zA-Z-]+(:\d+)?</string>
+			<key>name</key>
+			<string>constant.other</string>
+		</dict>
+		<key>numerics</key>
+		<dict>
+			<key>match</key>
+			<string>\b[0-9]*?\b</string>
 			<key>name</key>
 			<string>constant.other</string>
 		</dict>
