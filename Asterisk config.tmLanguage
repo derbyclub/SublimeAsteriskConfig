@@ -26,12 +26,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type</string>
+					<string>constant.language</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>storage.modifier</string>
+					<string>constant.language</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -115,17 +115,17 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>support.constant</string>
+							<string>variable.parameter</string>
 						</dict>
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>variable</string>
+							<string>support.function</string>
 						</dict>
 						<key>5</key>
 						<dict>
 							<key>name</key>
-							<string>support.constant</string>
+							<string>variable.parameter</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -158,7 +158,7 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>variable</string>
+							<string>support.function</string>
 						</dict>
 						<key>4</key>
 						<dict>
@@ -339,7 +339,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>support.function</string>
+					<string>meta.function-call</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -373,6 +373,14 @@
 				<dict>
 					<key>include</key>
 					<string>#numerics</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#ast_keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#boolean_value</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -420,6 +428,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#ast_keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#numerics</string>
 				</dict>
 			</array>
@@ -433,27 +445,37 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.operator</string>
+					<string>meta.function-call</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>support.function</string>
+					<string>meta.function-call</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.operator</string>
+					<string>meta.function-call</string>
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(\)\})</string>
+			<string>(\))([a-zA-Z0-9:]*)(\})</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.operator</string>
+					<string>meta.function-call</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>meta.function-call</string>
 				</dict>
 			</dict>
 			<key>name</key>
@@ -478,9 +500,24 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#ast_keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#boolean_value</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#ast_string</string>
 				</dict>
 			</array>
+		</dict>
+		<key>ast_keyword</key>
+		<dict>
+			<key>match</key>
+			<string>(=|&gt;|&lt;|!=|-|\+|&amp;|\||,|"|\?|:)</string>
+			<key>name</key>
+			<string>keyword.operator</string>
 		</dict>
 		<key>ast_string</key>
 		<dict>
@@ -492,7 +529,7 @@
 		<key>ast_variable</key>
 		<dict>
 			<key>match</key>
-			<string>\$\{[a-zA-Z0-9_-]+\}</string>
+			<string>\$\{[a-zA-Z0-9:_-]+\}</string>
 			<key>name</key>
 			<string>constant.numeric</string>
 		</dict>
