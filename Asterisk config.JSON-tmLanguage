@@ -130,7 +130,7 @@
 				{ "include": "#comment" },
 				{
 					"name": "meta.hint",
-					"begin": "^\\s*(exten)\\s*(=>)\\s*([a-zA-Z0-9_-]+),(hint),(.*)",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*([a-zA-Z0-9_\\-\\*]+),(hint),(.*)",
 					"beginCaptures": {
 						"1": { "name": "keyword.other" },
 						"2": { "name": "keyword.operator" },
@@ -145,7 +145,7 @@
 				},
 				{
 					"name": "meta.extension",
-					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z]+|[0-9]+|_[0-9XZN!\\.]+),(\\d+|n)(\\(.*?\\))?,",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z\\*\\-]+|[0-9\\*]+|_[a-zA-Z0-9XZN!\\.\\*\\-]+),(\\d+|n)(\\(.*?\\))?,",
 					"beginCaptures": {
 						"1": { "name": "keyword.other" },
 						"2": { "name": "keyword.operator" },
