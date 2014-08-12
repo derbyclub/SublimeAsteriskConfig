@@ -30,7 +30,7 @@
 		},
 		"ast_variable": {
 			"name": "constant.numeric",
-			"match": "\\$\\{[a-zA-Z0-9:_-]+\\}"
+			"match": "\\$\\{[a-zA-Z0-9_\\-]+(:[0-9])*\\}"
 		},
 		"ast_string": {
 				"name": "string.unquoted",
@@ -51,10 +51,10 @@
 				"1": { "name": "variable" }
 			},
 			"patterns": [
-				{ "include": "#ast_function" },
 				{ "include": "#ast_expression" },
 				{ "include": "#ast_variable" },
 				{ "include": "#ast_keyword" },
+				{ "include": "#ast_function" },
 				{ "include": "#numerics" }
 			]
 		},
@@ -73,9 +73,9 @@
 				"3": { "name": "meta.function-call" }
 			},
 			"patterns": [
+				{ "include": "#ast_variable" },
 				{ "include": "#ast_function" },
 				{ "include": "#ast_expression" },
-				{ "include": "#ast_variable" },
 				{ "include": "#numerics" },
 				{ "include": "#ast_keyword" },
 				{ "include": "#boolean_value" },
@@ -84,7 +84,7 @@
 		},
 		"ast_applications": {
 			"name": "meta.internal.function",
-			"begin": "(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|Noop|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\\(?",
+			"begin": "(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|QueueLog|Queue|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|Noop|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\\(?",
 			"beginCaptures": {
 				"1": { "name": "meta.function-call" }
 			},
@@ -145,7 +145,7 @@
 				},
 				{
 					"name": "meta.extension",
-					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z\\*\\-]+|[0-9\\*]+|_[a-zA-Z0-9XZN!\\.\\*\\-]+),(\\d+|n)(\\(.*?\\))?,",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z0-9\\*\\-#]+|[0-9\\*]+|_[a-zA-Z0-9XZN!\\.\\*\\-]+),(\\d+|n)(\\(.*?\\))?,",
 					"beginCaptures": {
 						"1": { "name": "keyword.other" },
 						"2": { "name": "keyword.operator" },
