@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Symbol List: Selectors</string>
 	<key>scope</key>
-	<string>constant.language</string>
+	<string>source.asterisk.config constant.language, source.asterisk.config storage.modifier</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
